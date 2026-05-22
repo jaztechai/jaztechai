@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonials</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <!-- Navbar will be inserted here -->
+  <div id="navbar-container"></div>
+   
+  <section class="testimonials-section">
+  <div class="container text-center">
+
+    <h2 class="fw-bold mb-2">What Our Clients Say</h2>
+    <p class="subtitle mb-5">Trusted by enterprises worldwide</p>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active">
+          <div class="testimonial-card mx-auto">
+            <div class="quote-icon">❝</div>
+            <p class="testimonial-text">
+              Their AI solutions streamlined our support and boosted productivity significantly.
+            </p>
+            <div class="client-info">
+              <div class="avatar">JD</div>
+              <div>
+                <h6>John Doe</h6>
+                <span>CTO, FinTech Co.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-item">
+          <div class="testimonial-card mx-auto">
+            <div class="quote-icon">❝</div>
+            <p class="testimonial-text">
+              Automation reduced our operational costs. Highly recommended AI partner.
+            </p>
+            <div class="client-info">
+              <div class="avatar">PS</div>
+              <div>
+                <h6>Priya Sharma</h6>
+                <span>CEO, HealthTech</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-item">
+          <div class="testimonial-card mx-auto">
+            <div class="quote-icon">❝</div>
+            <p class="testimonial-text">
+              Professional, innovative, and reliable team for enterprise AI solutions.
+            </p>
+            <div class="client-info">
+              <div class="avatar">AK</div>
+              <div>
+                <h6>Ahmed Khan</h6>
+                <span>COO, RetailCorp</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+    <!-- Footer will be dynamically inserted here -->
+    <div id="footer-container"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS (with Popper.js included) -->
+
+</html>
+
+<script>
+    // Fetch and insert the navbar
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+        });
+  // Dynamically load the footer from footer.html
+    fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+            });
+</script>

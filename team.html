@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Team</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+      <!-- Navbar will be inserted here -->
+  <div id="navbar-container"></div>
+   
+ <section class="leadership-section">
+  <div class="container">
+
+    <!-- Section Header -->
+    <div class="leadership-header mb-5">
+      <span class="badge leadership-badge">Leadership</span>
+      <h2 class="fw-bold mt-3">Leadership Insights</h2>
+      <p class="text-muted">Vision, guidance, and commitment from our leadership</p>
+    </div>
+
+    <!-- Leader Card -->
+    <div class="leader-card">
+      <div class="row align-items-start g-4">
+
+        <!-- Image -->
+        <div class="col-md-3 text-center">
+          <img src="img/JISHAN.jpeg" alt="Chairman" class="leader-img">
+        </div>
+
+        <!-- Content -->
+        <div class="col-md-9">
+          <h4 class="leader-name">MD JISHAN</h4>
+          <p class="leader-role">Chairman & Founder</p>
+
+          <blockquote class="leader-quote">
+            “Leadership is not just about growth, but about empowering people
+            with knowledge, skills, and opportunity.”
+          </blockquote>
+
+          <p class="leader-text">
+            Our mission is to make quality digital and technical education
+            accessible to every learner. Through structured programs,
+            innovation, and strong values, we continue to build a future-ready
+            workforce aligned with national and global needs.
+          </p>
+
+          <span class="leader-footer">Chairman’s Message</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Leader Card -->
+    <div class="leader-card">
+      <div class="row align-items-start g-4">
+
+        <div class="col-md-3 text-center">
+          <img src="team2.jpg" alt="Director" class="leader-img">
+        </div>
+
+        <div class="col-md-9">
+          <h4 class="leader-name">AFREEN KHATOON</h4>
+          <p class="leader-role">Director</p>
+
+          <p class="leader-text">
+            Innovation and inclusion drive our growth. Our focus remains on
+            expanding access, embracing emerging technologies, and building
+            sustainable learning ecosystems across regions.
+          </p>
+
+          <span class="leader-footer">Director’s Message</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Leader Card -->
+    <div class="leader-card">
+      <div class="row align-items-start g-4">
+
+        <div class="col-md-3 text-center">
+          <img src="img/ATIF.jpeg" alt="COO" class="leader-img">
+        </div>
+
+        <div class="col-md-9">
+          <h4 class="leader-name">ATIF ANSARI</h4>
+          <p class="leader-role">Chief Operations Officer</p>
+
+          <p class="leader-text">
+            Operational excellence and process-driven execution ensure
+            consistency, quality, and impact across all our programs and
+            initiatives nationwide.
+          </p>
+
+          <span class="leader-footer">COO’s Message</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+    <!-- Footer will be dynamically inserted here -->
+    <div id="footer-container"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS (with Popper.js included) -->
+
+</html>
+
+<script>
+    // Fetch and insert the navbar
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+        });
+</script>
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Insights</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Page Transition Overlay -->
+<div id="page-transition"></div>
+
+    <!-- Navbar will be inserted here -->
+  <div id="navbar-container"></div>
+  <section class="blog-timeline-section">
+  <div class="container">
+
+    <h2 class="fw-bold text-center mb-2">Insights & Resources</h2>
+    <p class="text-center text-muted mb-5">
+      Stay updated with the latest in AI & Automation
+    </p>
+
+    <div class="timeline">
+
+      <!-- Blog Item -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="blog-thumb" style="background-image:url('img/Ai\ project.png')">
+            <span class="blog-tag">AI</span>
+          </div>
+          <div class="blog-body">
+            <h4>The Future of AI Agents</h4>
+            <p>How autonomous AI agents are transforming enterprise workflows in 2025.</p>
+            <a href="#" class="blog-link">Read article →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Item -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="blog-thumb" style="background-image:url('img/automation-blog.jpg')">
+            <span class="blog-tag">Automation</span>
+          </div>
+          <div class="blog-body">
+            <h4>Top 5 Automation Trends</h4>
+            <p>Key automation technologies boosting productivity and operational efficiency.</p>
+            <a href="#" class="blog-link">Read article →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog Item -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+
+        <div class="timeline-content">
+          <div class="blog-thumb" style="background-image:url('img/enterprise-ai.jpg')">
+            <span class="blog-tag">Enterprise AI</span>
+          </div>
+          <div class="blog-body">
+            <h4>Scaling AI Solutions</h4>
+            <p>Best practices for deploying secure, scalable AI systems at enterprise scale.</p>
+            <a href="#" class="blog-link">Read article →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+    <!-- Footer will be dynamically inserted here -->
+    <div id="footer-container"></div>
+    <script>
+const reveals = document.querySelectorAll(".reveal");
+
+const revealOnScroll = () => {
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+};
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+</script>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS (with Popper.js included) -->
+
+</html>
+
+<script>
+    // Fetch and insert the navbar
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+        });
+        // Dynamically load the footer from footer.html
+    fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+            });
+</script>

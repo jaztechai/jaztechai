@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>.contact-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 10 !important;
+  margin-top: 35px;
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.contact-form-column,
+.contact-info-column {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.08);
+   border: 1.4px solid #ff7a00;
+}
+.hero-img {
+  width: 100%;
+  max-height: 50vh;        /* controls height */
+  object-fit: contain;    /* FITS full image (NO CROP) */
+  display: block;
+  margin: 0 auto 40px;    /* bottom margin added */
+  border-radius: 10px;
+}
+@media (max-width: 576px) {
+  .hero-img {
+    max-height: 40vh;
+    margin-bottom: 30px;
+    border-radius: 20px;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .contact-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+  
+</head>
+<body>
+
+  <!-- Navbar will be inserted here -->
+  <div id="navbar-container"></div>
+<!-- Contact Section -->
+<section class="contact-section animated-section">
+  <div class="container animated-section">
+    <div class="text-center mb-5">
+      <h2>Contact Us</h2>
+      <p>Feel free to reach out with any questions or inquiries. We're here to help!</p>
+    </div>
+    <img class="hero-img animated-section" src="img/Gemini_Generated_Image_aj2l8uaj2l8uaj2l.png" alt="">
+
+    <div id="formMessage" class="contact-row animated-section">
+      <!-- Contact Form -->
+      <div  class="contact-form-column">
+        <form class="contact-form" id="contact-form"  >
+          <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" name="name" class="form-control" id="name" placeholder="Enter your full name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Contact no.</label>
+            <input type="contact" name="contact" class="form-control" id="contact" placeholder="Enter your mobile number" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email address" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" name="message" id="message" rows="4" placeholder="Write your message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  emailjs.init("9xbTUd8oTjktTV5Sv");
+
+  let form = document.getElementById("contact-form");
+  let messageBox = document.getElementById("formMessage");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_3h27eby",
+      "template_rcvwp1h",
+      this
+    ).then(function () {
+
+      // ✅ SUCCESS MESSAGE
+      messageBox.className = "modern-alert success";
+      messageBox.innerHTML = "✅ Thanks for contacting us! We’ll get back to you shortly.";
+      messageBox.classList.remove("d-none");
+
+      form.reset();
+
+  
+
+    }, function (error) {
+
+      // ❌ ERROR MESSAGE
+      messageBox.className = "modern-alert error";
+      messageBox.innerHTML = "❌ Failed to send message. Please try again.";
+      messageBox.classList.remove("d-none");
+
+      console.error("EmailJS Error:", error);
+
+    });
+  });
+
+});
+</script>
+
+
+      <!-- Contact Information -->
+      <div class="contact-info-column animated-section">
+        <h4>Contact Information</h4>
+        <div class="contact-info">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-geo-alt icon"></i>
+            <p>29/4 Kustia Road Kolkata 700039</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-telephone icon"></i>
+            <p>9108407645</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="bi bi-envelope icon"></i>
+            <p>jishanmd387@gmail.com</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-chatbox" onclick="openWhatsAppModal()">
+      <a href="https://wa.me/+919108407645" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+      </a>
+  </div>
+
+  <!-- WhatsApp Modal (Optional Bot Chat) -->
+  <div class="whatsapp-modal" id="whatsappModal">
+      <div class="whatsapp-modal-header">
+          <span>Chat with Us on WhatsApp</span>
+          <button class="btn btn-sm btn-outline-light" onclick="closeWhatsAppModal()">X</button>
+      </div>
+      <div class="whatsapp-modal-body" id="whatsappChatBody">
+          <!-- Chat messages will be appended here -->
+      </div>
+      <div class="whatsapp-modal-footer">
+          <input type="text" class="whatsapp-input" id="whatsappInput" placeholder="Type a message..." onkeydown="handleWhatsAppInput(event)">
+      </div>
+  </div>
+
+    <!-- Google Map (Embed) -->
+    <div class="map-container mt-5">
+      <h4>Our Location</h4>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0207578616474!2d-122.41941568468155!3d37.77492977975986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6a61f3f3%3A0x7b547d61584902ab!2sGolden%20Gate%20Park%2C%20San%20Francisco%2C%20CA%2094117%2C%20USA!5e0!3m2!1sen!2sin!4v1633978224199!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+  <!-- Footer -->
+    <!-- Footer will be dynamically inserted here -->
+    <div id="footer-container"></div>
+
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+<script>
+const animatedSections = document.querySelectorAll('.animated-section');
+
+function scrollAnimate() {
+  animatedSections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 100; // 100px from bottom
+    if(sectionTop < triggerPoint) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active'); // allows animation every time
+    }
+  });
+}
+
+window.addEventListener('scroll', scrollAnimate);
+window.addEventListener('load', scrollAnimate);
+</script>
+
+<script>
+// Fetch and insert the navbar
+fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('navbar-container').innerHTML = data;
+    })
+    .catch(error => {
+        console.error('Error loading navbar:', error);
+    });
+ fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+            });
+</script>
+</body>
+</html>

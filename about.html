@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+ <!-- Navbar will be inserted here -->
+ <div id="navbar-container"></div>
+
+<!-- About Us Section -->
+<section class="about-section animated-section container" >
+      <!-- Left Side (Text and Tabs) -->
+      <div class="about-text" style="margin-top:50px;">
+          <h2>About Us</h2>
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" id="aboutTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="company-tab" data-bs-toggle="tab" href="#company" role="tab" aria-controls="company" aria-selected="true">Our Company</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="mission-tab" data-bs-toggle="tab" href="#mission" role="tab" aria-controls="mission" aria-selected="false">Our Mission</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="vision-tab" data-bs-toggle="tab" href="#vision" role="tab" aria-controls="vision" aria-selected="false">Our Vision</a>
+              </li>
+          </ul>
+
+<!-- Tab content -->
+          <div class="tab-content animated-section" id="aboutTabsContent">
+              <!-- Our Company Tab -->
+              <div class="tab-pane fade show active" id="company" role="tabpanel" aria-labelledby="company-tab">
+                  <h3>Our Company</h3>
+                  <p>We are a next-generation technology company focused on solving real-world problems through Artificial Intelligence automation and AI-driven solutions. In an era where businesses demand speed, accuracy, and scalability, we bridge the gap between innovation and practical implementation by designing powerful AI agents and advanced digital systems tailored to specific industry needs.<br><br>
+
+Our expertise spans across Artificial Intelligence, AI Agents, automation workflows, modern website development, web applications, and Android app solutions. We don’t just build technology — we engineer smart systems that think, adapt, and evolve with your business. From startups to enterprises, we help organizations transform their operations, improve efficiency, and unlock new growth opportunities using future-ready technology.<br><br>
+
+With a strong emphasis on quality, performance, and long-term scalability, our solutions are crafted using modern architectures, clean design principles, and cutting-edge tools. Every product we deliver reflects our commitment to innovation, reliability, and measurable business impact.</p>
+                  <a href="about.html" class="btn">Learn More</a>
+              </div>
+              <!-- Our Mission Tab -->
+              <div class="tab-pane fade" id="mission" role="tabpanel" aria-labelledby="mission-tab">
+                  <h3>Our Mission</h3>
+                  <p>Our mission is to empower businesses, institutions, and individuals by integrating AI-powered intelligence into everyday operations. We aim to replace repetitive manual processes, outdated systems, and inefficient workflows with smart AI agents and automation frameworks that deliver faster results, reduce costs, and enhance decision-making.<br><br>
+
+We strive to provide high-end, future-proof digital solutions — including modern websites, scalable web applications, mobile apps, and AI-driven platforms — that not only meet today’s demands but are also ready for tomorrow’s challenges. Through continuous research, innovation, and collaboration, we are committed to delivering solutions that exceed expectations and create real value for our clients.</p>
+                  <a href="#" class="btn">Learn More</a>
+              </div>
+              <!-- Our Vision Tab -->
+              <div class="tab-pane fade" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+                  <h3>Our Vision</h3>
+                  <p> Our vision is to become a global leader in AI-powered digital transformation, where intelligent agents play a central role in shaping how businesses operate, grow, and compete. We envision a future where AI is not just a tool, but a strategic partner — assisting organizations across industries such as education, healthcare, finance, startups, and enterprises.<br><br>
+
+By continuously innovating and pushing technological boundaries, we aim to build a world where automation, intelligence, and human creativity work together to solve complex problems. Our long-term goal is to create an ecosystem of scalable AI agents and advanced digital products that redefine efficiency, innovation, and user experience — setting new standards for the tech industry worldwide.</p>
+                  <a href="#" class="btn">Learn More</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- Right Side (Image) -->
+      <div class="about-image animated-section"  style="margin-top:180px;">
+          <img src="img/about_us.jpg" alt="About Us Image">
+      </div>
+</section>
+<!-- Footer -->
+    <!-- Footer will be dynamically inserted here -->
+    <div id="footer-container"></div>
+    <!-- Footer -->
+    <footer class="text-center py-4 bg-light">
+        <p>&copy; 2024 Your Website. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="animations.js"></script>
+    <script>
+const animatedSections = document.querySelectorAll('.animated-section');
+
+function scrollAnimate() {
+  animatedSections.forEach(section => {
+    const sectionTop = section.getBoundingClientRect().top;
+    const triggerPoint = window.innerHeight - 100; // 100px from bottom
+    if(sectionTop < triggerPoint) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active'); // allows animation every time
+    }
+  });
+}
+
+window.addEventListener('scroll', scrollAnimate);
+window.addEventListener('load', scrollAnimate);
+</script>
+
+</body>
+</html>
+
+<script>
+    // Fetch and insert the navbar
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-container').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+        });
+        // Dynamically load the footer from footer.html
+    fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+            });
+</script>
