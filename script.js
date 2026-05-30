@@ -1,6 +1,6 @@
 let greeted = false;
 let memory=[];
-
+const API_KEY = "sk-or-v1-xxxxxxxx";
 const SITE_PAGES = [
 
 "./index.html",
@@ -287,7 +287,7 @@ async function askAI(userText){
                 method:"POST",
 
                 headers:{
-                    "Authorization":"Bearer",
+                    "Authorization":"Bearer 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",
                     "Content-Type":"application/json",
 
                     // optional but recommended
