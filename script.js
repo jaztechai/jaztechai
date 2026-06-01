@@ -7,12 +7,10 @@ const SITE_PAGES = [
 "./courses.html",
 "./project.html",
 "./team.html",
-"./ai-course.html",
 "./contact.html",
-
-
-
 ];
+const OPENROUTER_API_KEY = "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";
+
 let WEBSITE_DATA = "Loading website data...";
 
 
@@ -199,6 +197,16 @@ let input=
 document.getElementById("textInput");
 
 let text=input.value;
+let loadingId = "loading-" + Date.now();
+
+let loadingTimer = setTimeout(() => {
+
+    addMsg(
+    "⏳ Please wait, I'm checking that for you...",
+    "ai"
+);
+
+}, 4000);
 
 if(!text) return;
 
@@ -231,6 +239,15 @@ return;
 }
 let reply=
 await askAI(text);
+clearTimeout(loadingTimer);
+
+let loadingMsg =
+document.getElementById(loadingId);
+
+if(loadingMsg){
+    loadingMsg.remove();
+}
+
 
 
 addMsg(reply,"ai");
@@ -261,8 +278,93 @@ function normalizeQuery(text){
     return text.toLowerCase().trim();
 }
 
+function getFriendlyReply(message){
+
+    const q = message.toLowerCase().trim();
+
+    const replies = {
+
+        "hi":"👋 Hello! I'm JAZ Tech AI Assistant. How can I help you today?",
+        "hello":"😊 Hello there! Welcome to JAZ Tech AI. How may I assist you?",
+        "hey":"😄 Hey! Great to see you. What can I do for you today?",
+
+        "how are you":"🤖 I'm doing great and ready to help! Thanks for asking. How are you doing today?",
+
+        "who are you":"🤖 I'm JAZ Tech AI Assistant, your virtual guide. I can help you learn about our corporate Programs, services, projects, and company information.",
+
+        "what is your age":"😄 I don't really have an age. I was created to help visitors anytime they need assistance.",
+
+        "what do you do":"🚀 I help visitors learn about JAZ Tech AI's services, courses, projects, and answer general questions.",
+
+        "thanks":"😊 You're very welcome! Happy to help.",
+
+        "thank you":"🙏 You're most welcome! Let me know if there's anything else I can help with.",
+
+        "sorry":"😇 No worries at all! How can I help you further?",
+        "address":"29/4 Kustia road kolkata 700039",
+        "location":"29/4 Kustia road kolkata 700039",
+
+        "good morning":"☀️ Good Morning! Hope you're having a wonderful day.",
+
+        "good afternoon":"🌤️ Good Afternoon! How can I assist you today?",
+
+        "good evening":"🌙 Good Evening! How may I help you today?",
+
+        "good night":"🌙 Good Night! Take care and have a restful sleep.",
+
+        "will you smile":"😊 Always! Here's my virtual smile for you. 😄",
+
+        "you look handsome":"😄 Thank you! That's very kind of you to say.",
+
+        "you are beautiful":"😊 Thank you! I appreciate your compliment.",
+
+        "tell me about yourself":"🤖 I'm JAZ Tech AI Assistant. I help visitors discover our courses, services, projects, and company information while making the experience friendly and easy.",
+
+        "what is your salary":"😂 I work completely for free and never ask for a salary.",
+
+        "what is your working hour":"🕒 I'm available 24×7 to assist visitors anytime.",
+
+        "till how long you available":"🚀 I'm available whenever you need assistance. Day or night, I'm here to help.",
+
+        "can you help me":"🤝 Absolutely! Tell me what you'd like to know and I'll do my best to help.",
+
+        "i love you":"😊 That's very sweet! I'm always happy to help and support you.",
+
+        "bye":"👋 Goodbye! Have a wonderful day and visit us again soon.",
+
+        "goodbye":"👋 Take care! It was nice chatting with you.",
+
+        "nice to meet you":"😄 Nice to meet you too! How may I assist you today?"
+    };
+
+    return replies[q] || null;
+}
+
 // ✅ Main function
 async function askAI(userText){
+    const q = userText.toLowerCase();
+    let friendlyReply = getFriendlyReply(userText);
+        if(q.includes("salary"))
+            {
+            return "😂 I work completely for free and never ask for a salary.";
+            }
+
+            if(q.includes("age"))
+            {
+            return "😄 I don't really have an age. I was created to help visitors.";
+            }
+
+            if(q.includes("working hour") || q.includes("available"))
+            {
+            return "🕒 I'm available 24×7 to assist visitors.";
+            }
+
+    if(friendlyReply){
+        return friendlyReply;
+    }
+
+
+    // your existing code continues...
 
         // NORMALIZE
     let query = normalizeQuery(userText);
@@ -277,62 +379,64 @@ async function askAI(userText){
         return aiCache[query];
 }
 
-    let context = searchKnowledge(userText).slice(0,1500);
+    let context = searchKnowledge(userText).slice(0,2500);
+    console.log("CONTEXT FOUND:");
+console.log(context);
+       const models = [
+         "openrouter/free",
+    "poolside/laguna-m.1:free",
+    
+    "qwen/qwen3-coder:free",
+    "openai/gpt-oss-20b:free",
+   
+];
 
-    try{
+let reply = "";
 
-        let response = await fetch(
+for (const model of models) {
+
+    try {
+
+        console.log("Trying model:", model);
+
+        const response = await fetch(
             "https://openrouter.ai/api/v1/chat/completions",
             {
-                method:"POST",
+                method: "POST",
 
-                headers:{
-                    "Authorization":"Bearer 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",
-                    "Content-Type":"application/json",
+                headers: {
+                    "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+                    "Content-Type": "application/json",
 
-                    // optional but recommended
-                    "HTTP-Referer":"http://127.0.0.1:5501",
-                    "X-Title":"JAZ Tech AI"
+                    "HTTP-Referer": "https://jaztechai.github.io",
+                    "X-Title": "JAZ Tech AI"
                 },
 
                 body: JSON.stringify({
 
-                    model:"arcee-ai/trinity-large-thinking:free",
+                    model: model,
 
-                    messages:[
+                    messages: [
                         {
-                            role:"system",
-                            content:`
+                            role: "system",
+                            content: `
 You are JAZ Tech AI assistant.
-
 
 Answer ONLY using WEBSITE DATA.
 
 Rules:
 - Be conversational
-- Do not say "based on the website".
--If founder name exists, directly tell it.
+- Do not say "based on the website"
+- If founder name exists, directly tell it
 - Be short and professional
-- If answer exists in website data, answer clearly
-- Never say "based on provided data"
 - Never mention AI limitations
-- If answer is unavailable, say:
-"Sorry, I could not find that information on our website."
-
-.
-
-Use professional formatting.
-
-Use:
-# Headings
-• Bullet points
-Short clean answers
+- If answer is unavailable say:
+"Sorry, I could not find that information . please correct your spelling or query"
 `
                         },
-
                         {
-                            role:"user",
-                            content:`
+                            role: "user",
+                            content: `
 WEBSITE DATA:
 ${context}
 
@@ -345,31 +449,26 @@ ${userText}
             }
         );
 
-        let data = await response.json();
+        const data = await response.json();
 
-        console.log("OpenRouter:", data);
+        if (data.error) {
 
-        // HANDLE API ERRORS
-        if(data.error){
+            console.log("Model failed:", model);
+            console.log(data.error);
 
-            console.log("❌ OpenRouter Error:", data.error);
-
-            return data.error.message;
+            continue;
         }
 
-        let reply =
-        data?.choices?.[0]?.message?.content ||
-        data?.choices?.[0]?.message?.reasoning ||
-        data?.choices?.[0]?.text ||
-        "";
+        reply =
+            data?.choices?.[0]?.message?.content ||
+            data?.choices?.[0]?.text ||
+            "";
 
-        if(reply){
+        if (reply && reply.trim().length > 2) {
+
+            console.log("Success using:", model);
 
             reply = reply.trim();
-
-            if(reply.length < 2){
-                return "AI could not generate response.";
-}
 
             aiCache[query] = reply;
 
@@ -378,17 +477,17 @@ ${userText}
                 JSON.stringify(aiCache)
             );
 
-        return reply;
-    }
+            return reply;
+        }
 
-    }
-    catch(err){
+    } catch (err) {
 
-        console.log(err);
-
-        return "AI error";
+        console.log("Error on model:", model, err);
     }
 }
+
+return "🚦 Our AI assistant is currently busy. Please try again in a moment.";
+    }
 
 function speak(text){
 
@@ -462,58 +561,142 @@ sendText();
 }
 
 
-function searchKnowledge(question){
+function searchKnowledge(question) {
 
     let q = question.toLowerCase();
+
+    const stopWords = [
+        "what","how","many","do","you","offer",
+        "is","are","the","a","an","of","in",
+        "to","for","on","and","about","tell",
+        "me","your","please","can","could",
+        "would","will","i","we","our"
+    ];
 
     let lines = WEBSITE_DATA.split("\n");
 
     let scored = [];
 
-    lines.forEach((line, index)=>{
+    lines.forEach((line, index) => {
 
         let lower = line.toLowerCase();
 
         let score = 0;
 
-        q.split(" ").forEach(word=>{
+        // Keyword matching
+        q.split(/\s+/).forEach(word => {
 
-            if(lower.includes(word)){
-                score += 3;
+            if(stopWords.includes(word)) return;
+
+            if(word.length < 3) return;
+
+            if(lower.includes(word)) {
+                score += 5;
             }
 
         });
 
-        // Important boosts
+        // Founder Boost
         if(q.includes("founder") && lower.includes("founder")){
-            score += 20;
+            score += 50;
         }
 
         if(q.includes("ceo") && lower.includes("ceo")){
-            score += 20;
+            score += 50;
         }
 
-        if(q.includes("team") && (
-            lower.includes("engineer") ||
-            lower.includes("officer") ||
-            lower.includes("associate")
-        )){
-            score += 15;
+        // Team Boost
+        if(
+            q.includes("team") &&
+            (
+                lower.includes("engineer") ||
+                lower.includes("officer") ||
+                lower.includes("associate") ||
+                lower.includes("developer") ||
+                lower.includes("manager")
+            )
+        ){
+            score += 40;
+        }
+
+        // Courses Boost
+        if(
+            q.includes("course") ||
+            q.includes("courses") ||
+            q.includes("training")
+        ){
+
+            if(
+                lower.includes("course") ||
+                lower.includes("artificial intelligence") ||
+                lower.includes("ai") ||
+                lower.includes("devops") ||
+                lower.includes("aws") ||
+                lower.includes("cyber") ||
+                lower.includes("python") ||
+                lower.includes("data science") ||
+                lower.includes("agentic")
+            ){
+                score += 100;
+            }
+
+        }
+
+        // Services Boost
+        if(
+            q.includes("service") ||
+            q.includes("services")
+        ){
+
+            if(
+                lower.includes("service") ||
+                lower.includes("development") ||
+                lower.includes("marketing") ||
+                lower.includes("automation")
+            ){
+                score += 80;
+            }
+
+        }
+
+        // Contact Boost
+        if(
+            q.includes("contact") ||
+            q.includes("phone") ||
+            q.includes("email")
+        ){
+
+            if(
+                lower.includes("@") ||
+                lower.includes("contact") ||
+                lower.includes("phone") ||
+                lower.includes("email")
+            ){
+                score += 80;
+            }
+
         }
 
         if(score > 0){
 
-            // include nearby lines
             let context = [
+
+                lines[index-3] || "",
+                lines[index-2] || "",
                 lines[index-1] || "",
+
                 line,
+
                 lines[index+1] || "",
-                lines[index+2] || ""
+                lines[index+2] || "",
+                lines[index+3] || "",
+                lines[index+4] || ""
+
             ].join("\n");
 
             scored.push({
                 text: context,
-                score
+                score: score
             });
 
         }
@@ -523,8 +706,12 @@ function searchKnowledge(question){
     scored.sort((a,b)=>b.score-a.score);
 
     let finalData = scored
-        .slice(0,10)
+        .slice(0,15)
         .map(x=>x.text)
+        .join("\n");
+
+    // Remove duplicates
+    finalData = [...new Set(finalData.split("\n"))]
         .join("\n");
 
     console.log("SEARCH RESULT:");
@@ -532,6 +719,7 @@ function searchKnowledge(question){
 
     return finalData;
 }
+
 async function loadWebsiteKnowledge(){
 
 let knowledge="";
@@ -561,7 +749,9 @@ for(let page of SITE_PAGES){
 
         let text = "";
 
-        let elements = doc.body.querySelectorAll("*");
+        let elements = doc.body.querySelectorAll(
+    "h1,h2,h3,h4,h5,h6,p,li,span,a,button"
+);
 
         elements.forEach(el => {
 
@@ -588,9 +778,21 @@ for(let page of SITE_PAGES){
         console.log("========== PAGE DATA ==========");
         console.log(text);
         console.log("================================");
+        let uniqueLines = [...new Set(text.split("\n"))]
+    .filter(x => x.trim());
+
+    text = uniqueLines.join("\n");
 
 
-        knowledge += text;
+        knowledge += `
+
+========================
+PAGE: ${page}
+========================
+
+${text}
+
+`;
 
     } catch(e){
         console.log("⚠️ Error loading:", page, e);

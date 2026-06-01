@@ -1111,6 +1111,27 @@ p {
     padding: 6px 12px;
   }
 }
+@media (max-width: 900px) and (orientation: landscape){
+
+    .video-card-container{
+        min-height: 85vh !important;
+    }
+
+}
+
+@media (max-width: 900px) and (orientation: landscape){
+
+    .video-card{
+        width:80%;
+        height:55vh;
+        aspect-ratio:auto;
+    }
+
+    .video-card video{
+        object-fit:cover;
+    }
+
+}
 
 /* Service Section */
 /* General Styling */
@@ -3581,4 +3602,112 @@ cursor:pointer;
 
 font-size:18px;
 
+}
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 1024px){
+
+    .ai-avatar-btn{
+        width:90px;
+        height:90px;
+        right:15px;
+        bottom:120px;
+    }
+
+    .ai-window{
+        width:350px !important;
+        height:520px !important;
+        right:15px !important;
+        bottom:15px !important;
+    }
+
+}
+
+/* =========================
+   MOBILE PORTRAIT
+========================= */
+@media (max-width: 768px){
+
+    .ai-avatar-btn{
+        width:70px;
+        height:70px;
+        right:10px;
+        bottom:100px;
+    }
+
+    .ai-window{
+        width:95vw !important;
+        height:75vh !important;
+
+        left:2.5vw !important;
+        right:auto !important;
+        bottom:10px !important;
+    }
+
+    .ai-photo{
+        width:140px;
+        height:40px;
+    }
+
+}
+
+/* =========================
+   MOBILE LANDSCAPE
+========================= */
+@media (max-width: 900px) and (orientation: landscape){
+
+    .ai-avatar-btn{
+        width:65px;
+        height:65px;
+        bottom:80px;
+    }
+
+    .ai-window{
+        width:420px !important;
+        height:85vh !important;
+
+        right:10px !important;
+        bottom:10px !important;
+    }
+
+}
+.analytics-dashboard{
+    background:#f5f9ff;
+}
+
+.stat-card{
+    background:linear-gradient(
+        135deg,
+        #0b1224,
+        #112a46
+    );
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    color:#fff;
+    height:100%;
+    transition:.4s;
+    border:1px solid rgba(0,255,200,.15);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.stat-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 35px rgba(0,255,200,.25);
+}
+
+.stat-card i{
+    font-size:32px;
+    color:#16d9c3;
+    margin-bottom:15px;
+}
+
+.stat-card h3{
+    color:#ffffff;
+    font-weight:700;
+}
+
+.stat-card p{
+    color:#d7e4ff;
 }
