@@ -8,6 +8,10 @@ const SITE_PAGES = [
 "./project.html",
 "./team.html",
 "./contact.html",
+"./products.html",
+"./services.html",
+"./team.html",
+"./industries",
 ];
 const OPENROUTER_API_KEY = "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";
 
@@ -120,22 +124,19 @@ if(!greeted){
 addMsg(`
 # 🤖 JAZ Tech AI Assistant
 
-Welcome to **JAZ Tech AI** 🚀
+Welcome to **JAZ Tech AI** 😊
 
 ## 📚 You can ask:
 
-• AI Courses  
-• Fees structure  
-• Duration  
-• Placement support  
-• Certifications  
+• Trending AI Courses/Programs  
+• Our Projects
+• Services  
+Our key services include :
+• AI Agents – Automate tasks and supercharge operations
+• Intelligent Websites & Apps – Scalable, futuristic digital platforms
+• Custom Software Solutions – Tailored to your business needs
 
-💬 Try asking:
-• *What courses do you offer?*
-• *Cybersecurity course details*
-• *AI course duration*
-
-How can I help you today?
+How can I help you today?😊
 `,"ai");
 
 greeted=true;

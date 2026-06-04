@@ -536,8 +536,8 @@ background-color: rgba(211, 211, 211, 0.589); /* lightgrey with 70% opacity */
      /* Floating WhatsApp Button */
 .whatsapp-chatbox {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+ top: 490px;
+  left: 10px;
   width: 60px;
   height: 60px;
   background: #25D366;
@@ -3710,4 +3710,15 @@ font-size:18px;
 
 .stat-card p{
     color:#d7e4ff;
+}
+
+@media screen and (max-height: 500px) and (orientation: landscape) {
+
+    .navbar {
+        padding: 4px 0;
+    }
+
+    .logo {
+        height: 40px;
+    }
 }
