@@ -886,3 +886,30 @@ input.addEventListener("focus", () => {
     }, 300);
 
 });
+if (window.visualViewport) {
+
+    const chat = document.querySelector(".ai-window");
+
+    function resizeChat() {
+
+        const keyboardHeight =
+            window.innerHeight - window.visualViewport.height;
+
+        if (keyboardHeight > 120) {
+
+            chat.style.height =
+                (window.visualViewport.height - 20) + "px";
+
+            chat.style.bottom = "0px";
+
+        } else {
+
+            chat.style.height = "";
+            chat.style.bottom = "10px";
+
+        }
+    }
+
+    window.visualViewport.addEventListener("resize", resizeChat);
+    window.visualViewport.addEventListener("scroll", resizeChat);
+}
