@@ -2789,11 +2789,12 @@ transform:translateX(-50%);
 
 .ai-window{
 
-position:fixed;
+position: fixed;
+inset: auto 10px 10px 10px;
 
 right:25px;
 
-bottom:100px;
+bottom:80px;
 
 width:370px;
 
@@ -3721,4 +3722,39 @@ font-size:18px;
     .logo {
         height: 40px;
     }
+}
+/* Fix mobile keyboard viewport issues */
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body.keyboard-open {
+    overflow: hidden;
+}
+
+/* Modern mobile viewport */
+.video-card-container {
+    min-height: 100dvh;
+}
+
+/* Prevent fixed elements from breaking */
+.whatsapp-chatbox,
+.whatsapp-modal {
+    position: fixed;
+    z-index: 99999;
+}
+@media (max-width: 768px) {
+
+  .ai-window {
+      height: 75dvh !important;
+      max-height: 75dvh !important;
+  }
+
+  .ai-body {
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+  }
+
 }

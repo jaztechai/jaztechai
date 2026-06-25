@@ -837,3 +837,52 @@ sendText();
 console.log(WEBSITE_DATA.length);
 console.log(document.getElementById("textInput"));
 console.log("WEBSITE DATA:", WEBSITE_DATA.slice(0,500));
+const viewport = window.visualViewport;
+
+if (viewport) {
+    viewport.addEventListener("resize", () => {
+
+        if (viewport.height < window.innerHeight * 0.75) {
+            document.body.classList.add("keyboard-open");
+        } else {
+            document.body.classList.remove("keyboard-open");
+        }
+
+    });
+}
+const vv = window.visualViewport;
+
+if (vv) {
+
+    vv.addEventListener("resize", () => {
+
+        const chatWindow = document.getElementById("aiWindow");
+
+        if (!chatWindow) return;
+
+        if (vv.height < window.innerHeight * 0.75) {
+
+            chatWindow.style.height = (vv.height - 20) + "px";
+
+        } else {
+
+            chatWindow.style.height = "";
+
+        }
+    });
+
+}
+const input = document.getElementById("textInput");
+
+input.addEventListener("focus", () => {
+
+    setTimeout(() => {
+
+        input.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }, 300);
+
+});
