@@ -106,49 +106,7 @@
           <button type="submit" class="btn btn-primary">Send Message</button>
         </form>
       </div>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  emailjs.init("9xbTUd8oTjktTV5Sv");
-
-  let form = document.getElementById("contact-form");
-  let messageBox = document.getElementById("formMessage");
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    emailjs.sendForm(
-      "service_3h27eby",
-      "template_rcvwp1h",
-      this
-    ).then(function () {
-
-      // ✅ SUCCESS MESSAGE
-      messageBox.className = "modern-alert success";
-      messageBox.innerHTML = "✅ Thanks for contacting us! We’ll get back to you shortly.";
-      messageBox.classList.remove("d-none");
-
-      form.reset();
-
-  
-
-    }, function (error) {
-
-      // ❌ ERROR MESSAGE
-      messageBox.className = "modern-alert error";
-      messageBox.innerHTML = "❌ Failed to send message. Please try again.";
-      messageBox.classList.remove("d-none");
-
-      console.error("EmailJS Error:", error);
-
-    });
-  });
-
-});
-</script>
 
 
       <!-- Contact Information -->
@@ -208,7 +166,49 @@ document.addEventListener("DOMContentLoaded", function () {
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  emailjs.init("9xbTUd8oTjktTV5Sv");
+
+  let form = document.getElementById("contact-form");
+  let messageBox = document.getElementById("formMessage");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_3h27eby",
+      "template_rcvwp1h",
+      this
+    ).then(function () {
+
+      // ✅ SUCCESS MESSAGE
+      messageBox.className = "modern-alert success";
+      messageBox.innerHTML = "✅ Thanks for contacting us! We’ll get back to you shortly.";
+      messageBox.classList.remove("d-none");
+
+      form.reset();
+
+  
+
+    }, function (error) {
+
+      // ❌ ERROR MESSAGE
+      messageBox.className = "modern-alert error";
+      messageBox.innerHTML = "❌ Failed to send message. Please try again.";
+      messageBox.classList.remove("d-none");
+
+      console.error("EmailJS Error:", error);
+
+    });
+  });
+
+});
+</script>
 <script>
 const animatedSections = document.querySelectorAll('.animated-section');
 

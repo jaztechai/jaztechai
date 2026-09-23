@@ -3638,8 +3638,8 @@ font-size:18px;
     }
 
     .ai-window{
-        width:350px !important;
-        height:520px !important;
+        width:300px !important;
+        height:320px !important;
         right:15px !important;
         bottom:15px !important;
     }
@@ -3659,7 +3659,7 @@ font-size:18px;
     }
 
     .ai-window{
-        width:95vw !important;
+        width:85vw !important;
         height:min(650px, calc(100dvh - 90px));
         max-height:calc(100dvh - 90px);
 
