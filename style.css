@@ -3777,3 +3777,37 @@ body.keyboard-open {
   }
 
 }
+#jaztechai-title {
+    display: inline-block;
+    position: relative;
+
+    background: linear-gradient(
+        90deg,
+        #111 0%,
+        #111 42%,
+        #00e5ff 48%,
+        #ffffff 50%,
+        #00e5ff 52%,
+        #111 58%,
+        #111 100%
+    );
+
+    background-size: 300% 100%;
+    background-position: 100% 0;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: jaztechaiLight 5s linear infinite;
+}
+
+@keyframes jaztechaiLight {
+    0% {
+        background-position: 100% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
