@@ -1088,29 +1088,69 @@ p {
 }
 
 @media (max-width: 768px) {
-  .video-card {
-    width: 95%;
-    aspect-ratio: 16 / 7;
-  }
-  .unmuteBtn {
-    bottom: 10px;
-    left: 10px;
-    font-size: 14px;
-    padding: 8px 14px;
-  }
+    .video-card-container {
+        height: clamp(230px, 55vw, 380px);
+    }
+
+    .video-card-container .video-card {
+        width: 94%;
+        aspect-ratio: 16 / 9;
+    }
+
+    .video-card-container .arrow-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 25px;
+    }
+
+    .video-card-container .arrow-left {
+        left: 5px;
+    }
+
+    .video-card-container .arrow-right {
+        right: 5px;
+    }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+    .video-card-container {
+        height: 75vh;
+        min-height: 200px !important;
+    }
+
+    .video-card-container .video-card {
+        height: 100%;
+        width: auto;
+        max-width: 94%;
+        aspect-ratio: 16 / 9;
+    }
+}
+/* Mobile phones */
+@media (max-width: 480px) {
+    .video-card-container {
+        height: auto;
+        min-height: 0 !important;
+        aspect-ratio: 16 / 10;
+    }
+
+    .video-card-container .video-card {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        border-radius: 0;
+    }
+
+    .video-card-container .video-card video {
+        object-fit: contain;
+    }
+
+    .video-card-container .unmuteBtn {
+        bottom: 8px;
+        left: 8px;
+        padding: 7px 10px;
+        font-size: 12px;
+    }
 }
 
-@media (max-width: 480px) {
-  .video-card {
-    width: 100%;
-    aspect-ratio: 16 / 7;
-    border-radius: 10px;
-  }
-  .unmuteBtn {
-    font-size: 13px;
-    padding: 6px 12px;
-  }
-}
 @media (max-width: 900px) and (orientation: landscape){
 
     .video-card-container{
@@ -2264,18 +2304,32 @@ html, body {
   
 }
 
-/* Remove fixed heights */
-.video-card-container {
-  position: relative;
-  width: 100%;
-  padding: 80px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at center, #07071a 30%, #000 100%);
-  overflow: hidden;
-}
 
+  
+  
+
+.video-card-container .video-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(90%, 1100px);
+    max-width: 1100px;
+    height: auto;
+    aspect-ratio: 16 / 7;
+    margin: 0 !important;
+    border-radius: 30;
+    overflow: hidden;
+    background: #000;
+    box-sizing: border-box;
+}
+.video-card-container .video-card video,
+.video-card-container .video-card .heroVideo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 
 
 /* Fix 3D AI card width */
@@ -2353,9 +2407,7 @@ html, body {
 
 }
 
-.video-card-container {
-  min-height: 58vh;
-}
+
 /* Fix big fixed card width */
 @media (max-width: 1400px) {
   .ai3d-card {
@@ -3811,3 +3863,201 @@ body.keyboard-open {
         background-position: -200% 0;
     }
 }
+
+
+/* =========================================
+   JAZTechAI — VIDEO HERO RESPONSIVE STYLES
+========================================= */
+
+/* Main hero section */
+.video-card-container {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+
+    height: clamp(221px, 35.7vw, 442px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    margin: 82px auto 0 !important;
+    padding: 14px 0 !important;
+
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    background: #000 !important;
+}
+
+/* Carousel card */
+.video-card-container .video-card {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+
+    width: min(100%, 1500px) !important;
+    height: calc(100% - 28px) !important;
+    max-width: 1500px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+
+    background: #000 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+
+    transform: translate(-50%, -50%) !important;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+/* Actual video: rounded corners belong here */
+.video-card-container .video-card video.heroVideo {
+    display: block !important;
+
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100% !important;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    border-radius: 18px !important;
+    clip-path: inset(0 round 18px);
+    background: #000 !important;
+}
+
+/* Active slide */
+.video-card-container .video-card.active {
+    opacity: 1 !important;
+    z-index: 2 !important;
+}
+
+
+/* Support videos without the heroVideo class */
+.video-card-container .video-card video:not(.heroVideo) {
+    border-radius: 18px !important;
+    clip-path: inset(0 round 18px);
+}
+
+/* Audio control */
+.video-card-container .unmuteBtn {
+    position: absolute;
+    z-index: 10 !important;
+    bottom: 12px !important;
+    left: 12px !important;
+    max-width: calc(100% - 24px) !important;
+    box-sizing: border-box !important;
+}
+
+/* Navigation arrows */
+.video-card-container .arrow-btn {
+    z-index: 15 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.video-card-container .arrow-left {
+    left: 10px !important;
+}
+
+.video-card-container .arrow-right {
+    right: 10px !important;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .video-card-container {
+        margin-top: 76px !important;
+        height: clamp(204px, 47.8vw, 323px) !important;
+        padding: 12px 0 !important;
+    }
+
+    .video-card-container .video-card {
+        width: 100% !important;
+        height: calc(100% - 24px) !important;
+    }
+
+    .video-card-container .video-card video.heroVideo,
+    .video-card-container .video-card video:not(.heroVideo) {
+        border-radius: 14px !important;
+        clip-path: inset(0 round 14px);
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .video-card-container {
+        margin-top: 72px !important;
+        height: clamp(187px, 52.7vw, 255px) !important;
+        padding: 10px 0 !important;
+    }
+
+    .video-card-container .video-card {
+        width: 100% !important;
+        height: calc(100% - 20px) !important;
+    }
+
+    .video-card-container .arrow-btn {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 24px !important;
+    }
+
+    .video-card-container .video-card video.heroVideo,
+    .video-card-container .video-card video:not(.heroVideo) {
+        border-radius: 12px !important;
+        clip-path: inset(0 round 12px);
+    }
+}
+
+/* Landscape spacing fix */
+@media (max-width: 900px) and (orientation: landscape) {
+    #navbar-container {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        border-bottom: 0 !important;
+    }
+
+    .video-card-container {
+        margin-top: 70px !important;
+        margin-bottom: 0 !important;
+        height: 63.75vh !important;
+        border-top: 0 !important;
+        outline: none !important;
+    }
+}
+
+/* Fix mobile landscape navbar dropdown clipping */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+    #navbar-container {
+        position: relative !important;
+        z-index: 9999 !important;
+        overflow: visible !important;
+    }
+
+    #navbar-container .custom-navbar {
+        overflow: visible !important;
+    }
+
+    #navbar-container .navbar-collapse.show {
+        display: block !important;
+        max-height: calc(100dvh - 80px) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        padding-bottom: 20px !important;
+    }
+
+    #navbar-container .navbar-collapse .dropdown-menu {
+        position: static !important;
+        float: none !important;
+        max-height: none !important;
+        overflow: visible !important;
+        transform: none !important;
+        margin-bottom: 12px !important;
+    }
+}
+
